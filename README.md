@@ -1,4 +1,4 @@
-# Use saved embeddings in a telegram chat
+# Use saved embeddings in a Discord chat
 
 If you want to build locally, make sure you have installed Rust and added the `wasm32-wasi` target.
 
