@@ -143,7 +143,7 @@ async fn handler(msg: Message) {
     // Search for embeddings from the question
     let p = PointsSearchParams {
         vector: question_vector,
-        limit: 5,
+        limit: 2,
     };
     let mut system_prompt_updated = String::from(&cs.system_prompt);
     match search_points(&cs.collection_name, &p).await {
@@ -151,7 +151,7 @@ async fn handler(msg: Message) {
             for p in sp.iter() {
                 if system_prompt_updated.len() > SOFT_CHAR_LIMIT { break; }
                 log::debug!("Received vector score={} and text={}", p.score, first_x_chars(p.payload.as_ref().unwrap().get("text").unwrap().as_str().unwrap(), 256));
-                if p.score > 0.75 {
+                if p.score > 0.5 {
                     system_prompt_updated.push_str("\n");
                     system_prompt_updated.push_str(p.payload.as_ref().unwrap().get("text").unwrap().as_str().unwrap());
                 }
